@@ -59,6 +59,15 @@ class Despesa
     /**
      * Get the value of descricao
      */
+    
+    public function getDados() {
+        
+        $dados = "\nDescrição:" . $this->descricao ."\nValor:" . $this->valor . "\n" ;
+        
+        return $dados;
+        
+    }
+    
     public function getDescricao()
     {
         return $this->descricao;
@@ -94,6 +103,7 @@ class Despesa
 }
 
 $listaRece = array();
+$listaDesp = array();
 
 do {
 
@@ -123,7 +133,7 @@ do {
 
         case '3':
 
-            print "\n------Compra------";
+            print "\n------Receitas------";
 
             foreach ($listaRece as $a) {
                 
@@ -141,23 +151,53 @@ do {
             $rece->setDescricao(readline("O que vai comprar:"));
             $rece->setValor(readline("Qual é o valor:"));
 
-            array_push($listaRece, $rece);
+            array_push($listaDesp, $rece);
 
             system('clear');
 
 
             break;
 
-
-
         case '4':
+            
+            print "\n------Despesas------";
+            
+            foreach($listaDesp as $b) {
+                
+                print $b->getDados();
+                
+            }
+            
 
 
 
             break;
 
         case '5':
-
+            
+            print "\n------Sumarizador------\n";
+            
+            $totalDesp = 0;
+            
+            foreach($listaDesp as $b) {
+                
+                $totalDesp =  $totalDesp + $b->getValor();
+                
+            }
+            
+            echo "Total das despesas:" . $totalDesp . "\n" ;
+            
+            $totalRece = 0;
+            
+            foreach($listaRece as $b) {
+                
+                $totalRece =  $totalRece + $b->getValor();
+                
+            }
+            
+            echo "Total das receitas:" . $totalRece . "\n" ;
+            echo "Saldo:". ($totalRece - $totalDesp) . "\n";
+            
 
 
             break;
